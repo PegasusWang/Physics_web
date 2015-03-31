@@ -6,6 +6,8 @@ class Student(models.Model):
     stu_id = models.CharField(u'学号', max_length=30, primary_key=True)
     name = models.CharField(u'姓名', max_length=30)
     password = models.CharField(u'密码', max_length=30)
+    answer = models.CharField(u'答案', max_length=30)
+    email = models.EmailField(u'邮箱', blank=True)
 
     def __unicode__(self):
         return '{stu_id} {name}'.format(stu_id=self.stu_id, name=self.name)
@@ -14,6 +16,7 @@ class Student(models.Model):
 class Teacher(models.Model):
     """Teacher Info"""
     name = models.CharField(u'姓名', max_length=30)
+    email = models.EmailField(u'邮箱', blank=True)
 
     def __unicode__(self):
         return self.name
