@@ -1,3 +1,12 @@
+# -*- coding:utf-8 -*-
+"""
+# Author: Pegasus Wang (pegasuswang@qq.com, http://ningning.today)
+# Created Time : Wed Apr  1 19:27:43 2015
+
+# File Name: t.py
+# Description:
+
+"""
 from django.db import models
 
 
@@ -5,6 +14,7 @@ class Student(models.Model):
     """Student Info"""
     stu_id = models.CharField(u'学号', max_length=30, primary_key=True)
     name = models.CharField(u'姓名', max_length=30)
+    class_id = models.CharField(u'班级', max_length=30, blank=True)
     password = models.CharField(u'密码', max_length=30)
     answer = models.CharField(u'答案', max_length=30)
     email = models.EmailField(u'邮箱', blank=True)
@@ -22,26 +32,27 @@ class Teacher(models.Model):
         return self.name
 
 
-class Questoin(models.Model):
+class Question(models.Model):
     """Question Info"""
+    question_id = models.IntegerField(u'题号', primary_key=True)
     title = models.TextField(u'题目')
     content = models.TextField(u'选项')
     answer = models.CharField(u'答案', max_length=1)
-    a_select_users = models.IntegerField(u'选A')
-    b_select_users = models.IntegerField(u'选B')
-    c_select_users = models.IntegerField(u'选C')
-    d_select_users = models.IntegerField(u'选D')
+    a_select_users = models.IntegerField(u'选A人数')
+    b_select_users = models.IntegerField(u'选B人数')
+    c_select_users = models.IntegerField(u'选C人数')
+    d_select_users = models.IntegerField(u'选D人数')
 
     def __unicode__(self):
         return self.title
 
 
-class Notification(self):
+class Notification(models.Model):
     """Notification Info"""
-    owener = models.ForeignKey(Teacher)
+    owner = models.ForeignKey(Teacher, verbose_name=u'通知人')
     title = models.TextField(u'通知标题')
     content = models.TextField(u'通知内容')
-    time = models.DateField(u'通知时间')
+    time = models.DateTimeField(u'通知时间')
 
     def __unicode__(self):
         return self.title
