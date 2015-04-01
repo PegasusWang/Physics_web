@@ -27,6 +27,10 @@ class Questoin(models.Model):
     title = models.TextField(u'题目')
     content = models.TextField(u'选项')
     answer = models.CharField(u'答案', max_length=1)
+    a_select_users = models.IntegerField(u'选A')
+    b_select_users = models.IntegerField(u'选B')
+    c_select_users = models.IntegerField(u'选C')
+    d_select_users = models.IntegerField(u'选D')
 
     def __unicode__(self):
         return self.title
