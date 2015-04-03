@@ -1,9 +1,7 @@
 # -*- coding:utf-8 -*-
 """
 # Author: Pegasus Wang (pegasuswang@qq.com, http://ningning.today)
-# Created Time : Wed Apr  1 19:55:08 2015
 
-# File Name: admin.py
 # Description:
 
 """

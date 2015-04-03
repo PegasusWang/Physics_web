@@ -1,9 +1,7 @@
 # -*- coding:utf-8 -*-
 """
 # Author: Pegasus Wang (pegasuswang@qq.com, http://ningning.today)
-# Created Time : Wed Apr  1 19:27:43 2015
 
-# File Name: t.py
 # Description:
 
 """
@@ -16,11 +14,11 @@ class Student(models.Model):
     name = models.CharField(u'姓名', max_length=30)
     class_id = models.CharField(u'班级', max_length=30, blank=True)
     password = models.CharField(u'密码', max_length=30)
-    answer = models.CharField(u'答案', max_length=30)
+    answer = models.CharField(u'答案', max_length=30, blank=True)
     email = models.EmailField(u'邮箱', blank=True)
 
     def __unicode__(self):
-        return '{stu_id} {name}'.format(stu_id=self.stu_id, name=self.name)
+        return self.name
 
 
 class Teacher(models.Model):
@@ -38,10 +36,10 @@ class Question(models.Model):
     title = models.TextField(u'题目')
     content = models.TextField(u'选项')
     answer = models.CharField(u'答案', max_length=1)
-    a_select_users = models.IntegerField(u'选A人数')
-    b_select_users = models.IntegerField(u'选B人数')
-    c_select_users = models.IntegerField(u'选C人数')
-    d_select_users = models.IntegerField(u'选D人数')
+    a_select_users = models.IntegerField(u'选A人数', default=0)
+    b_select_users = models.IntegerField(u'选B人数', default=0)
+    c_select_users = models.IntegerField(u'选C人数', default=0)
+    d_select_users = models.IntegerField(u'选D人数', default=0)
 
     def __unicode__(self):
         return self.title
