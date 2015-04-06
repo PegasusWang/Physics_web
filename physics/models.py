@@ -2,7 +2,7 @@
 """
 # Author: Pegasus Wang (pegasuswang@qq.com, http://ningning.today)
 
-# Description:
+# Description: Some models definition.
 
 """
 from django.db import models
