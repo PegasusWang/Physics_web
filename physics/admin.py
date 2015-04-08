@@ -17,6 +17,7 @@ class TeacherAdmin(admin.ModelAdmin):
 
 class StudentAdmin(admin.ModelAdmin):
     list_display = ('stu_id', 'name', 'password', 'email')
+    ordering = ('stu_id',)
     search_fields = ('stu_id',)
 
 
@@ -27,7 +28,7 @@ class QuestionAdmin(admin.ModelAdmin):
 
 
 class NotificationAdmin(admin.ModelAdmin):
-    list_display = ('owner', 'title', 'content', 'time')
+    list_display = ('nid', 'owner', 'title', 'content', 'time')
     search_fields = ('owner',)
 
 
