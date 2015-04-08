@@ -48,6 +48,7 @@ class Question(models.Model):
 class Notification(models.Model):
     """Notification Info"""
     owner = models.ForeignKey(Teacher, verbose_name=u'通知人')
+    nid = models.IntegerField(u'通知id')
     title = models.TextField(u'通知标题')
     content = models.TextField(u'通知内容')
     time = models.DateTimeField(u'通知时间')
