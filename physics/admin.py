@@ -24,11 +24,13 @@ class StudentAdmin(admin.ModelAdmin):
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ('question_id', 'title', 'answer',
         'a_select_users', 'b_select_users', 'c_select_users', 'd_select_users')
+    ordering = ('question_id',)
     search_fields = ('question_id',)
 
 
 class NotificationAdmin(admin.ModelAdmin):
     list_display = ('nid', 'owner', 'title', 'content', 'time')
+    ordering = ('nid',)
     search_fields = ('owner',)
 
 
