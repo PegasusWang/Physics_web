@@ -32,17 +32,20 @@ class Teacher(models.Model):
 
 class Question(models.Model):
     """Question Info"""
-    question_id = models.IntegerField(u'题号', primary_key=True)
-    title = models.TextField(u'题目')
-    content = models.TextField(u'选项')
-    answer = models.CharField(u'答案', max_length=1)
+    t_id = models.IntegerField(u'题号', primary_key=True)
+    t_content = models.TextField(u'题目')
+    t_answer = models.CharField(u'答案', max_length=1)
     a_select_users = models.IntegerField(u'选A人数', default=0)
     b_select_users = models.IntegerField(u'选B人数', default=0)
     c_select_users = models.IntegerField(u'选C人数', default=0)
     d_select_users = models.IntegerField(u'选D人数', default=0)
+    t_option1 = models.TextField(u'选项A', blank=True)
+    t_option2 = models.TextField(u'选项B', blank=True)
+    t_option3 = models.TextField(u'选项C', blank=True)
+    t_option4 = models.TextField(u'选项D', blank=True)
 
     def __unicode__(self):
-        return self.title
+        return self.t_content
 
 
 class Notification(models.Model):
