@@ -22,10 +22,12 @@ class StudentAdmin(admin.ModelAdmin):
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('question_id', 'title', 'answer',
-        'a_select_users', 'b_select_users', 'c_select_users', 'd_select_users')
-    ordering = ('question_id',)
-    search_fields = ('question_id',)
+    list_display = ('t_id', 't_content',
+                    't_option1', 't_option2', 't_option3', 't_option4',
+                    'a_select_users', 'b_select_users',
+                    'c_select_users', 'd_select_users', 't_answer')
+    ordering = ('t_id',)
+    search_fields = ('t_id',)
 
 
 class NotificationAdmin(admin.ModelAdmin):
