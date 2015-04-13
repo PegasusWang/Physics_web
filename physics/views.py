@@ -6,6 +6,9 @@
 # Description: Android backend views and frontend show views.
 
 """
+
+import json
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -30,7 +33,7 @@ def login(request):
         return HttpResponse(login_fail, content_type=u'text/html;charset=utf-8',
                             status=200)
     else:
-        print 'login_success'
+        print '%s login_success' % stu_id
         return HttpResponse(login_success, content_type=u'text/html;charset=utf-8',
                             status=200)
 
@@ -56,18 +59,21 @@ def register(request):
         return HttpResponse('user_exist', content_type=u'text/html;charset=utf-8',
                             status=200)
 
+'''
 def show_question(request):
     """process Android ShowAllQuestionActivity GET"""
-    json_queryset = serializers.serialize('json', Question.objects.all())
-    print json_queryset
-    print type(json_queryset)
+    json_queryset_str = serializers.serialize('json', Question.objects.all())
+    #print json_queryset_str[0].replace('fields', 'showall')
+    print json_queryset_str
     #return HttpResponse(json_queryset, content_type=u'text/html;charset=utf-8',
                         #status=200)
-
-
-def res_notice(request):
-    # TODO
-    pass
+'''
+def notice(request):
+    """process Android NoticeActivity GET"""
+    json_queryset_str = serializers.serialize('json', Notification.objects.all())
+    res = u'{"showall":' +  json_queryset_str + u'}'
+    print res
+    return HttpResponse(res, content_type=u'text/html;charset=utf-8', status=200)
 
 
 def upload_answer(request):
