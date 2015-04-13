@@ -53,8 +53,15 @@ class Notification(models.Model):
     owner = models.ForeignKey(Teacher, verbose_name=u'通知人')
     nid = models.IntegerField(u'通知id')
     title = models.TextField(u'通知标题')
-    content = models.TextField(u'通知内容')
+    notice = models.TextField(u'通知内容')
     time = models.DateTimeField(u'通知时间')
 
     def __unicode__(self):
         return self.title
+
+
+class Result(models.Model):
+    """Question result info."""
+    t_id = models.IntegerField(u'题号')
+    user_num = models.CharField(u'学号', max_length=30)
+    my_option = models.CharField(u'答案', max_length=10)
