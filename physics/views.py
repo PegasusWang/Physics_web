@@ -7,17 +7,15 @@
 
 """
 
-import json
-
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
 
-from models import Student, Question, Notification
+from models import Student, Question, Notification, Result
 
 
-@csrf_exempt
+@csrf_exempt    # note: use csrf_exempt for all POST, or you will get 403 error
 def login(request):
     """process android LoginActivity post"""
     stu_id = request.POST.get(u'usernum')
@@ -38,7 +36,7 @@ def login(request):
                             status=200)
 
 
-@csrf_exempt    # note: for post method use csrf_exempt or 403 error
+@csrf_exempt
 def register(request):
     """process android RegisterActivity post"""
     name = request.POST.get(u'username')
@@ -75,7 +73,11 @@ def notice(request):
     return HttpResponse(res, content_type=u'text/html;charset=utf-8', status=200)
 
 
+@csrf_exempt
 def upload_answer(request):
-    # TODO
-    pass
-
+    """process Android ShowAllQuestionActivity POST"""
+    t_id = request.POST.get(u't_id')
+    user_num = request.POST.get(u'user')
+    my_option = request.POST.get(u'myoption')
+    ans = Result.objects.create(t_id=t_id, user_num=user_num, my_option=my_option)
+    return HttpResponse('upload_success', content_type=u'text/html;charset=utf-8', status=200)

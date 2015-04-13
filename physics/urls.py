@@ -15,4 +15,5 @@ urlpatterns = patterns('',
     url(r'^login', views.login),
     url(r'^show_question', views.show_question),
     url(r'^notice', views.notice),
+    url(r'^upload_answer', views.upload_answer),
 )
