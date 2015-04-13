@@ -13,4 +13,6 @@ from physics import views
 urlpatterns = patterns('',
     url(r'^register', views.register),
     url(r'^login', views.login),
+    url(r'^show_question', views.show_question),
+    url(r'^notice', views.notice),
 )
