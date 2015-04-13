@@ -7,7 +7,7 @@
 """
 
 from django.contrib import admin
-from physics.models import Teacher, Student, Question, Notification
+from physics.models import Teacher, Student, Question, Notification, Result
 
 
 class TeacherAdmin(admin.ModelAdmin):
@@ -31,12 +31,19 @@ class QuestionAdmin(admin.ModelAdmin):
 
 
 class NotificationAdmin(admin.ModelAdmin):
-    list_display = ('nid', 'owner', 'title', 'content', 'time')
+    list_display = ('nid', 'owner', 'title', 'notice', 'time')
     ordering = ('nid',)
     search_fields = ('owner',)
+
+
+class ResultAdmin(admin.ModelAdmin):
+    list_display = ('t_id', 'user_num', 'my_option')
+    ordering = ('t_id',)
+    search_fields = ('t_id',)
 
 
 admin.site.register(Teacher, TeacherAdmin)
 admin.site.register(Student, StudentAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Notification, NotificationAdmin)
+admin.site.register(Result, ResultAdmin)
