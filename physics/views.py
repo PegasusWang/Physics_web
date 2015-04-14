@@ -77,7 +77,8 @@ def notice(request):
 def upload_answer(request):
     """process Android ShowAllQuestionActivity POST"""
     t_id = request.POST.get(u't_id')
-    user_num = request.POST.get(u'user')
+    user_num = request.POST.get(u'usernum')
     my_option = request.POST.get(u'myoption')
-    ans = Result.objects.create(t_id=t_id, user_num=user_num, my_option=my_option)
+    print t_id, user_num, my_option
+    Result.objects.create(t_id=t_id, user_num=user_num, my_option=my_option)
     return HttpResponse('upload_success', content_type=u'text/html;charset=utf-8', status=200)
