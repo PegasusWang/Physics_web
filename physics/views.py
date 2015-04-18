@@ -80,5 +80,10 @@ def upload_answer(request):
     user_num = request.POST.get(u'usernum')
     my_option = request.POST.get(u'myoption')
     print t_id, user_num, my_option
-    Result.objects.create(t_id=t_id, user_num=user_num, my_option=my_option)
+    try:
+        obj = Result.objects.get(t_id=t_id, user_num=user_num)
+    except Result.DoesNotExist:
+        Result.objects.create(t_id=t_id, user_num=user_num, my_option=my_option)
+    else:
+        Result.objects.filter(t_id=t_id, user_num=user_num).update(my_option=my_option)
     return HttpResponse('upload_success', content_type=u'text/html;charset=utf-8', status=200)
