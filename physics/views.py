@@ -87,3 +87,7 @@ def upload_answer(request):
     else:
         Result.objects.filter(t_id=t_id, user_num=user_num).update(my_option=my_option)
     return HttpResponse('upload_success', content_type=u'text/html;charset=utf-8', status=200)
+
+
+def index(request):
+    return render(request, 'physics/index.html', {})

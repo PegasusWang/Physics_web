@@ -11,9 +11,13 @@ from django.conf.urls import patterns, url
 from physics import views
 
 urlpatterns = patterns('',
+    # for android backend
     url(r'^register', views.register),
     url(r'^login', views.login),
     url(r'^show_question', views.show_question),
     url(r'^notice', views.notice),
     url(r'^upload_answer', views.upload_answer),
+
+    # for frontend
+    url(r'^$', views.index, name='index'),
 )

@@ -14,6 +14,7 @@ class Migration(migrations.Migration):
             name='Notification',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('nid', models.IntegerField(verbose_name='\u901a\u77e5id')),
                 ('title', models.TextField(verbose_name='\u901a\u77e5\u6807\u9898')),
                 ('content', models.TextField(verbose_name='\u901a\u77e5\u5185\u5bb9')),
                 ('time', models.DateTimeField(verbose_name='\u901a\u77e5\u65f6\u95f4')),
@@ -25,14 +26,17 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Question',
             fields=[
-                ('question_id', models.IntegerField(serialize=False, verbose_name='\u9898\u53f7', primary_key=True)),
-                ('title', models.TextField(verbose_name='\u9898\u76ee')),
-                ('content', models.TextField(verbose_name='\u9009\u9879')),
-                ('answer', models.CharField(max_length=1, verbose_name='\u7b54\u6848')),
-                ('a_select_users', models.IntegerField(verbose_name='\u9009A\u4eba\u6570')),
-                ('b_select_users', models.IntegerField(verbose_name='\u9009B\u4eba\u6570')),
-                ('c_select_users', models.IntegerField(verbose_name='\u9009C\u4eba\u6570')),
-                ('d_select_users', models.IntegerField(verbose_name='\u9009D\u4eba\u6570')),
+                ('t_id', models.IntegerField(serialize=False, verbose_name='\u9898\u53f7', primary_key=True)),
+                ('t_content', models.TextField(verbose_name='\u9898\u76ee')),
+                ('t_answer', models.CharField(max_length=1, verbose_name='\u7b54\u6848')),
+                ('a_select_users', models.IntegerField(default=0, verbose_name='\u9009A\u4eba\u6570')),
+                ('b_select_users', models.IntegerField(default=0, verbose_name='\u9009B\u4eba\u6570')),
+                ('c_select_users', models.IntegerField(default=0, verbose_name='\u9009C\u4eba\u6570')),
+                ('d_select_users', models.IntegerField(default=0, verbose_name='\u9009D\u4eba\u6570')),
+                ('t_option1', models.TextField(verbose_name='\u9009\u9879A', blank=True)),
+                ('t_option2', models.TextField(verbose_name='\u9009\u9879B', blank=True)),
+                ('t_option3', models.TextField(verbose_name='\u9009\u9879C', blank=True)),
+                ('t_option4', models.TextField(verbose_name='\u9009\u9879D', blank=True)),
             ],
             options={
             },
@@ -45,7 +49,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=30, verbose_name='\u59d3\u540d')),
                 ('class_id', models.CharField(max_length=30, verbose_name='\u73ed\u7ea7', blank=True)),
                 ('password', models.CharField(max_length=30, verbose_name='\u5bc6\u7801')),
-                ('answer', models.CharField(max_length=30, verbose_name='\u7b54\u6848')),
+                ('answer', models.CharField(max_length=30, verbose_name='\u7b54\u6848', blank=True)),
                 ('email', models.EmailField(max_length=75, verbose_name='\u90ae\u7bb1', blank=True)),
             ],
             options={
