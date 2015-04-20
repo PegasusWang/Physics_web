@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 plt.rcParams['font.sans-serif'] = ['SimHei']    # set default font
 
 
-def draw_result(a_num, b_num, c_num, d_num, n_groups):
+def draw_histogram(a_num, b_num, c_num, d_num, n_groups):
     """Draw result.
 
     :param a_num: tuple of select A users.
@@ -68,9 +68,31 @@ def draw_result(a_num, b_num, c_num, d_num, n_groups):
     #plt.savefig(u't.png')
 
 
+def draw_piechart(question_info):
+    """Draw pie chart of each question.
+
+    :param: question_info is a list of users.  eg: [12, 23, 43, 13]
+            means 12 people select A, 23 select B, 43 C, 13 D.
+    """
+    labels = 'A', 'B', 'C', 'D'
+    colors = ['yellowgreen', 'gold', 'lightskyblue', 'lightcoral']
+    #explode = (0, 0.1, 0, 0) # only "explode" the 2nd slice (i.e. 'Hogs')
+
+    plt.pie(question_info, explode=explode, labels=labels, colors=colors,
+                    autopct='%1.1f%%', shadow=True, startangle=90)
+    # Set aspect ratio to be equal so that pie is drawn as a circle.
+    plt.axis('equal')
+
+    plt.show()
+
+
 n_groups = 6
 a_num = (20, 35, 30, 35, 27, 18)
 b_num = (25, 32, 34, 20, 28, 18)
 c_num = (25, 32, 34, 27, 25, 18)
 d_num = (25, 31, 33, 20, 25, 18)
-draw_result(a_num, b_num, c_num, d_num, n_groups)
+#draw_histogram(a_num, b_num, c_num, d_num, n_groups)
+
+question_info = [15, 30, 25, 10]
+draw_piechart(question_info)
+
