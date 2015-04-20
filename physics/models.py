@@ -5,6 +5,8 @@
 # Description: Some models definition.
 
 """
+import os
+
 from django.db import models
 
 
@@ -29,6 +31,8 @@ class Teacher(models.Model):
     def __unicode__(self):
         return self.name
 
+def get_image_path(instance, filename):
+    return os.path.join('images', unicode(instance.t_id), filename)
 
 class Question(models.Model):
     """Question Info"""
@@ -43,6 +47,7 @@ class Question(models.Model):
     t_option2 = models.TextField(u'选项B', blank=True)
     t_option3 = models.TextField(u'选项C', blank=True)
     t_option4 = models.TextField(u'选项D', blank=True)
+    t_image = models.ImageField(u'Image', upload_to=get_image_path, blank=True)
 
     def __unicode__(self):
         return self.t_content
