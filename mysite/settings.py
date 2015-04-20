@@ -92,3 +92,8 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
+
+PARENT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MEDIA_ROOT = os.path.join(PARENT_ROOT, 'media/')
+#print MEDIA_ROOT
+MEDIA_URL = '/media/'
