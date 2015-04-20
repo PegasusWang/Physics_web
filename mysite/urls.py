@@ -1,5 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.conf.urls.static import static
+import settings
 
 urlpatterns = patterns('',
     # Examples:
@@ -10,3 +12,5 @@ urlpatterns = patterns('',
     url(r'^users/', include('physics.urls', namespace='physics')),
     url(r'^admin/', include(admin.site.urls)),
 )
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

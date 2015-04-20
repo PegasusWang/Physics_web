@@ -24,8 +24,7 @@ class StudentAdmin(admin.ModelAdmin):
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ('t_id', 't_content',
                     't_option1', 't_option2', 't_option3', 't_option4',
-                    'a_select_users', 'b_select_users',
-                    'c_select_users', 'd_select_users', 't_answer')
+                    't_answer', 't_image')
     ordering = ('t_id',)
     search_fields = ('t_id',)
 
