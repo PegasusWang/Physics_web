@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="sub-header">学生信息</h2>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>班级</th>
+        <th>邮箱</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    {% for student in object_list %}
+        <tr>
+            <td>{{student.stu_id}}</td>
+            <td>{{student.name}}</td>
+            <td>{{student.class_id}}</td>
+            <td>{{student.email}}</td>
+        </tr>
+    {% endfor %}
+
+{% endblock %}
+    </tbody>
+  </table>
+</div>
