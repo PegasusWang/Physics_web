@@ -91,3 +91,4 @@ def upload_answer(request):
 
 def index(request):
     return render(request, 'physics/index.html', {})
+
