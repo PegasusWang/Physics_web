@@ -9,12 +9,13 @@
 
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
+from django.views.decorators.csrf import csrf_exempt
+from django.views.generic.list import ListView
 
 from models import Student, Question, Notification, Result
 
-
+# for Android backend
 @csrf_exempt    # note: use csrf_exempt for all POST, or you will get 403 error
 def login(request):
     """process android LoginActivity post"""
@@ -57,6 +58,7 @@ def register(request):
         return HttpResponse('user_exist', content_type=u'text/html;charset=utf-8',
                             status=200)
 
+
 def show_question(request):
     """process Android ShowAllQuestionActivity GET"""
     json_queryset_str = serializers.serialize('json', Question.objects.all())
@@ -92,3 +94,27 @@ def upload_answer(request):
 def index(request):
     return render(request, 'physics/index.html', {})
 
+
+# for frontend
+class StudentListView(ListView):
+    model = Student
+
+    def get_context_data(self, **kwargs):
+        context = super(StudentListView, self).get_context_data(**kwargs)
+        return context
+
+
+class NotificationListView(ListView):
+    model = Notification
+
+    def get_context_data(self, **kwargs):
+        context = super(NotificationListView, self).get_context_data(**kwargs)
+        return context
+
+
+class QuestionListView(ListView):
+    model = Question
+
+    def get_context_data(self, **kwargs):
+        context = super(QuestionListView, self).get_context_data(**kwargs)
+        return context

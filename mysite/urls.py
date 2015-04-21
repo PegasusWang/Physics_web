@@ -8,9 +8,9 @@ urlpatterns = patterns('',
     # url(r'^$', 'mysite.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^', include('physics.urls')),
+    #url(r'^', include('physics.urls')),
     url(r'^users/', include('physics.urls', namespace='physics')),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls), name='admin'),
 )
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
