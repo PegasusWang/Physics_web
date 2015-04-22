@@ -23,4 +23,5 @@ urlpatterns = patterns('',
     url(r'^students/$', views.StudentListView.as_view(), name='student_info'),
     url(r'^questions/$', views.QuestionListView.as_view(), name='question_info'),
     url(r'^notifications/$', views.NotificationListView.as_view(), name='notification_info'),
+    url(r'^questions/$', views.QuestionListView.as_view(), name='question_info'),
 )

@@ -16,7 +16,7 @@ from django.views.generic.list import ListView
 from models import Student, Question, Notification, Result
 
 # for Android backend
-@csrf_exempt    # note: use csrf_exempt for all POST, or you will get 403 error
+@csrf_exempt  # note: use csrf_exempt for all POST, or you will get 403 error
 def login(request):
     """process android LoginActivity post"""
     stu_id = request.POST.get(u'usernum')
@@ -80,7 +80,7 @@ def upload_answer(request):
     """process Android ShowAllQuestionActivity POST"""
     t_id = request.POST.get(u't_id')
     user_num = request.POST.get(u'usernum')
-    my_option = request.POST.get(u'myoption')
+    my_option = request.POST.get(u'myoption').upper()  # change answer to upper
     print t_id, user_num, my_option
     try:
         obj = Result.objects.get(t_id=t_id, user_num=user_num)
@@ -118,3 +118,41 @@ class QuestionListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(QuestionListView, self).get_context_data(**kwargs)
         return context
+
+
+def show_result(request):
+    """draw result image"""
+    import matplotlibUtil
+    from mysite.settings import MEDIA_ROOT
+
+    # draw histogram
+    n_groups = Question.objects.all().count()
+    options = ('A', 'B', 'C', 'D')
+    nums = []
+    for option in options:
+        num = []
+        for tid in range(1, n_groups + 1):
+            cnt = Result.objects.filter(t_id=tid, my_option=option).count()
+            num.append(cnt)
+        nums.append(num)
+    histogram_path = MEDIA_ROOT + 'images/results/' + '0.png'
+    print histogram_path
+    matplotlibUtil.draw_histogram(nums[0], nums[1], nums[2], nums[3], n_groups,
+                                  histogram_path)
+
+    # draw pie chart
+    for tid in range(1, n_groups+1):
+        explode = [0.0, 0.0, 0.0, 0.0]
+        answer_num = ord(Question.objects.get(t_id=tid).t_answer.upper()) - ord('A')
+        explode[answer_num] = 0.1
+        explode = tuple(explode)
+
+        question_info = []
+        for each in options:
+            cnt = Result.objects.filter(t_id=tid, my_option=each).count()
+            question_info.append(cnt)
+
+        chart_path = MEDIA_ROOT + 'images/results/' + str(tid) + '.png'
+        print chart_path
+        matplotlibUtil.draw_piechart(question_info, explode, chart_path)
+

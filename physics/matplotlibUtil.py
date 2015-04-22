@@ -1,19 +1,23 @@
-#coding=utf-8
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
 """
 Bar chart demo with pairs of bars grouped for easy comparison.
 """
 import numpy as np
-import matplotlib.pyplot as plt
-plt.rcParams['font.sans-serif'] = ['SimHei']    # set default font
+#import matplotlib.pyplot as plt
+import matplotlib.pyplot
 
 
-def draw_histogram(a_num, b_num, c_num, d_num, n_groups):
+def draw_histogram(a_num, b_num, c_num, d_num, n_groups, path):
     """Draw result.
 
     :param a_num: tuple of select A users.
                   eg: (12, 2, 34, 12, 78, 13).
     :param n_groups: The length of tuple a_num.
+    :param path: The path images would save.
     """
+    plt = matplotlib.pyplot
+    plt.rcParams['font.sans-serif'] = ['SimHei']    # set default font
     fig, ax = plt.subplots()
     index = np.arange(n_groups)
     bar_width = 0.2
@@ -64,16 +68,19 @@ def draw_histogram(a_num, b_num, c_num, d_num, n_groups):
     ax.set_ybound(0, 40)
 
     plt.tight_layout()
-    plt.show()
-    #plt.savefig(u't.png')
+    #plt.show()
+    plt.savefig(path)
+    plt.clf()    # note: remember plt.clf() to clear buffer
 
 
-def draw_piechart(question_info):
+def draw_piechart(question_info, explode, path):
     """Draw pie chart of each question.
 
     :param: question_info is a list of users.  eg: [12, 23, 43, 13]
             means 12 people select A, 23 select B, 43 C, 13 D.
     """
+    plt = matplotlib.pyplot
+    plt.rcParams['font.sans-serif'] = ['SimHei']    # set default font
     labels = 'A', 'B', 'C', 'D'
     colors = ['yellowgreen', 'gold', 'lightskyblue', 'lightcoral']
     #explode = (0, 0.1, 0, 0) # only "explode" the 2nd slice (i.e. 'Hogs')
@@ -83,9 +90,12 @@ def draw_piechart(question_info):
     # Set aspect ratio to be equal so that pie is drawn as a circle.
     plt.axis('equal')
 
-    plt.show()
+    #plt.show()
+    plt.savefig(path)
+    plt.clf()    # note: remember plt.clf() to clear buffer
 
 
+'''
 n_groups = 6
 a_num = (20, 35, 30, 35, 27, 18)
 b_num = (25, 32, 34, 20, 28, 18)
@@ -93,8 +103,7 @@ c_num = (25, 32, 34, 27, 25, 18)
 d_num = (25, 31, 33, 20, 25, 18)
 #draw_histogram(a_num, b_num, c_num, d_num, n_groups)
 
-question_info = [15, 30, 25, 10]
 explode = (0, 0, 0, 0)
-#draw_piechart(question_info, explode, '')
-draw_piechart(question_info)
-
+question_info = [15, 30, 25, 10]
+draw_piechart(question_info, explode, '')
+'''

@@ -70,7 +70,7 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
 LANGUAGE_CODE = 'zh-cn'
-#LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Shanghai'
 
@@ -95,5 +95,5 @@ TEMPLATE_DIRS = (
 
 PARENT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEDIA_ROOT = os.path.join(PARENT_ROOT, 'media/')
-#print MEDIA_ROOT
+# print MEDIA_ROOT
 MEDIA_URL = '/media/'
