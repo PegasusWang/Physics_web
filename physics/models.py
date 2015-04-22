@@ -22,6 +22,9 @@ class Student(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        ordering = ['stu_id']
+
 
 class Teacher(models.Model):
     """Teacher Info"""
@@ -31,8 +34,10 @@ class Teacher(models.Model):
     def __unicode__(self):
         return self.name
 
+
 def get_image_path(instance, filename):
     return os.path.join('images', unicode(instance.t_id), filename)
+
 
 class Question(models.Model):
     """Question Info"""
@@ -70,3 +75,6 @@ class Result(models.Model):
     t_id = models.IntegerField(u'题号')
     user_num = models.CharField(u'学号', max_length=30)
     my_option = models.CharField(u'答案', max_length=10)
+
+    class Meta:
+        ordering = ['t_id']

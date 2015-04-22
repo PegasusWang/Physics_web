@@ -92,7 +92,7 @@ def upload_answer(request):
 
 
 def index(request):
-    return render(request, 'physics/index.html', {})
+    return render(request, 'physics/student_list.html', {})
 
 
 # for frontend
@@ -117,6 +117,14 @@ class QuestionListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(QuestionListView, self).get_context_data(**kwargs)
+        return context
+
+
+class ResultListView(ListView):
+    model = Result
+
+    def get_context_data(self, **kwargs):
+        context = super(ResultListView, self).get_context_data(**kwargs)
         return context
 
 
@@ -156,3 +164,8 @@ def show_result(request):
         print chart_path
         matplotlibUtil.draw_piechart(question_info, explode, chart_path)
 
+    images = []
+    for i in range(n_groups+1):
+        images.append('/media/images/results/'+str(i)+'.png')
+    return render(request, 'physics/result_image.html',
+                  {'images': images})

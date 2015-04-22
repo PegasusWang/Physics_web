@@ -65,7 +65,8 @@
             <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
             <li><a href="{% url 'physics:student_info' %}">学生信息</a></li>
             <li><a href="{% url 'physics:question_info' %}">题目浏览</a></li>
-            <li><a href="#">统计分析</a></li>
+            <li><a href="{% url 'physics:result_info' %}">统计分析</a></li>
+            <li><a href="{% url 'physics:result_image' %}">统计图表</a></li>
             <li><a href="{% url 'physics:notification_info' %}">教师通知</a></li>
             <li><a href="{% url 'admin:index' %}">后台管理</a></li>
           </ul>

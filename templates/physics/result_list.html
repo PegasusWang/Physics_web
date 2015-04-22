@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="sub-header">答题信息</h2>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>题号</th>
+        <th>学号</th>
+        <th>学生答案</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    {% for each_result in object_list %}
+        <tr>
+            <td>{{each_result.t_id}}</td>
+            <td>{{each_result.user_num}}</td>
+            <td>{{each_result.my_option}}</td>
+        </tr>
+    {% endfor %}
+
+{% endblock %}
+    </tbody>
+  </table>
+</div>

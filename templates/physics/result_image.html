@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="sub-header">统计结果</h2>
+
+    {% for each_url in images %}
+    <img src="{{ each_url }}" width="700" height="500"/><br />
+    {% endfor %}
+
+{% endblock %}
