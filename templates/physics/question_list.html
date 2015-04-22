@@ -1,29 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2 class="sub-header">学生信息</h2>
-<div class="table-responsive">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>学号</th>
-        <th>姓名</th>
-        <th>班级</th>
-        <th>邮箱</th>
-      </tr>
-    </thead>
-    <tbody>
+<h2 class="sub-header">题目浏览</h2>
 
-    {% for student in object_list %}
-        <tr>
-            <td>{{student.stu_id}}</td>
-            <td>{{student.name}}</td>
-            <td>{{student.class_id}}</td>
-            <td>{{student.email}}</td>
-        </tr>
+    {% for question in object_list %}
+        <p>
+        {{ question.t_id }}.{{ question.t_content }}<br />
+        A.{{ question.t_option1 }}<br />
+        B.{{ question.t_option2 }}<br />
+        C.{{ question.t_option3 }}<br />
+        D.{{ question.t_option4 }}<br />
+        {% if question.t_image %}
+            <img src="{{ question.t_image.url }}" width="900" height="600"/><br />
+        {% endif %}
+        </p>
     {% endfor %}
 
+
 {% endblock %}
-    </tbody>
-  </table>
 </div>
