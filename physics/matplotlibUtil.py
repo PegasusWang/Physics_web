@@ -4,8 +4,10 @@
 Bar chart demo with pairs of bars grouped for easy comparison.
 """
 import numpy as np
-#import matplotlib.pyplot as plt
-import matplotlib.pyplot
+import matplotlib as mpl
+mpl.use('Agg')
+import matplotlib.pyplot as plt
+plt.rcParams['font.sans-serif'] = ['SimHei']    # set default font
 
 
 def draw_histogram(a_num, b_num, c_num, d_num, n_groups, path):
@@ -16,8 +18,6 @@ def draw_histogram(a_num, b_num, c_num, d_num, n_groups, path):
     :param n_groups: The length of tuple a_num.
     :param path: The path images would save.
     """
-    plt = matplotlib.pyplot
-    plt.rcParams['font.sans-serif'] = ['SimHei']    # set default font
     fig, ax = plt.subplots()
     index = np.arange(n_groups)
     bar_width = 0.2
@@ -71,6 +71,7 @@ def draw_histogram(a_num, b_num, c_num, d_num, n_groups, path):
     #plt.show()
     plt.savefig(path)
     plt.clf()    # note: remember plt.clf() to clear buffer
+    plt.close()
 
 
 def draw_piechart(question_info, explode, path):
@@ -79,8 +80,6 @@ def draw_piechart(question_info, explode, path):
     :param: question_info is a list of users.  eg: [12, 23, 43, 13]
             means 12 people select A, 23 select B, 43 C, 13 D.
     """
-    plt = matplotlib.pyplot
-    plt.rcParams['font.sans-serif'] = ['SimHei']    # set default font
     labels = 'A', 'B', 'C', 'D'
     colors = ['yellowgreen', 'gold', 'lightskyblue', 'lightcoral']
     #explode = (0, 0.1, 0, 0) # only "explode" the 2nd slice (i.e. 'Hogs')
@@ -93,6 +92,7 @@ def draw_piechart(question_info, explode, path):
     #plt.show()
     plt.savefig(path)
     plt.clf()    # note: remember plt.clf() to clear buffer
+    plt.close()
 
 
 '''
