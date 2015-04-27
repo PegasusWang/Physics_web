@@ -145,8 +145,12 @@ def show_result(request):
         nums.append(num)
     histogram_path = MEDIA_ROOT + 'images/results/' + '0.png'
     print histogram_path
-    matplotlibUtil.draw_histogram(nums[0], nums[1], nums[2], nums[3], n_groups,
-                                  histogram_path)
+    try:
+        matplotlibUtil.draw_histogram(nums[0], nums[1], nums[2], nums[3], 
+                                      n_groups, histogram_path)
+    except:
+        return render(request, 'physics/result_image.html',
+                      {'images': None})
 
     # draw pie chart
     for tid in range(1, n_groups+1):
@@ -162,7 +166,11 @@ def show_result(request):
 
         chart_path = MEDIA_ROOT + 'images/results/' + str(tid) + '.png'
         print chart_path
-        matplotlibUtil.draw_piechart(question_info, explode, chart_path)
+        try:
+            matplotlibUtil.draw_piechart(question_info, explode, chart_path)
+        except:
+            return render(request, 'physics/result_image.html',
+                          {'images': None})
 
     images = []
     for i in range(n_groups+1):
