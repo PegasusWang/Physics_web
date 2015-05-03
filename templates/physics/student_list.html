@@ -23,7 +23,12 @@
         </tr>
     {% endfor %}
 
-{% endblock %}
     </tbody>
   </table>
 </div>
+<form action="{% url 'physics:student_upload' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="stu_file"/>
+    <input type="submit" value="Upload" name="submit"/>
+</form>导入前请先到后台删除旧的学生信息.
+{% endblock %}
