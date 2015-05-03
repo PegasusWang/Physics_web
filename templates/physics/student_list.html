@@ -30,5 +30,13 @@
     {% csrf_token %}
     <input type="file" name="stu_file"/>
     <input type="submit" value="Upload" name="submit"/>
-</form>导入前请先到后台删除旧的学生信息.
+</form>
+<p>上传说明：上传格式为txt文件，如果您的文件是excel文件，请直接在excel中拷贝包含学生学号和姓名的两列，粘贴到一个txt文本中即可。注意：上传后会清空之前
+    的学生信息。<br>
+文件示例：学生.txt<br>
+111114201   王某人<br>
+111114202   李某人<br>
+111114203   李某人<br>
+111114204   张某人<br>
+</p>
 {% endblock %}

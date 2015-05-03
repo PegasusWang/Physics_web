@@ -8,13 +8,12 @@
 """
 
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.list import ListView
 
 from models import Student, Question, Notification, Result
-from .forms import UploadFileForm
 import fileHandler
 
 # for Android backend
@@ -110,13 +109,10 @@ class StudentListView(ListView):
 def upload_stu_file(request):
     """Get student information file and import to database"""
     if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
         fileHandler.handle_uploaded_file(request.FILES['stu_file'])
-        return render(request, 'physics/student_upload.html', {'form': form})
+        return HttpResponseRedirect('/users/students/')
     else:
-        print 'fail'
         return HttpResponse('upload fail')
-    # TODO
 
 
 class NotificationListView(ListView):
