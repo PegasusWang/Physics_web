@@ -14,6 +14,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.list import ListView
 
 from models import Student, Question, Notification, Result
+from .forms import UploadFileForm
+import fileHandler
 
 # for Android backend
 @csrf_exempt  # note: use csrf_exempt for all POST, or you will get 403 error
@@ -104,6 +106,19 @@ class StudentListView(ListView):
         return context
 
 
+@csrf_exempt  # note: use csrf_exempt for all POST, or you will get 403 error
+def upload_stu_file(request):
+    """Get student information file and import to database"""
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        fileHandler.handle_uploaded_file(request.FILES['stu_file'])
+        return render(request, 'physics/student_upload.html', {'form': form})
+    else:
+        print 'fail'
+        return HttpResponse('upload fail')
+    # TODO
+
+
 class NotificationListView(ListView):
     model = Notification
 
@@ -148,7 +163,7 @@ def show_result(request):
     try:
         matplotlibUtil.draw_histogram(nums[0], nums[1], nums[2], nums[3], 
                                       n_groups, histogram_path)
-    except:
+    except:    # handle all exception
         return render(request, 'physics/result_image.html',
                       {'images': None})
 
@@ -175,5 +190,4 @@ def show_result(request):
     images = []
     for i in range(n_groups+1):
         images.append('/media/images/results/'+str(i)+'.png')
-    return render(request, 'physics/result_image.html',
-                  {'images': images})
+    return render(request, 'physics/result_image.html', {'images': images})

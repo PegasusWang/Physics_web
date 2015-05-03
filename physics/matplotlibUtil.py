@@ -7,7 +7,7 @@ import numpy as np
 import matplotlib as mpl
 mpl.use('Agg')
 import matplotlib.pyplot as plt
-plt.rcParams['font.sans-serif'] = ['SimHei']    # set default font
+plt.rcParams['font.sans-serif'] = ['SimHei']    # set default font for mac
 
 
 def draw_histogram(a_num, b_num, c_num, d_num, n_groups, path):
