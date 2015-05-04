@@ -187,3 +187,29 @@ def show_result(request):
     for i in range(n_groups+1):
         images.append('/media/images/results/'+str(i)+'.png')
     return render(request, 'physics/result_image.html', {'images': images})
+
+from excel_response import ExcelResponse
+def result_excel(request):
+    """Export excel file of result"""
+    tid_list = Result.objects.values_list('t_id', flat=True)
+    user_list = Result.objects.values_list('user_num', flat=True)
+    opt_list = Result.objects.values_list('my_option', flat=True)
+
+    data = [[]]
+    data.append((u't_id', u'stu_id', u'option'))
+    for tid, user, opt in zip(tid_list, user_list, opt_list):
+        data.append([tid, user, opt])
+
+    return ExcelResponse(data, u'result_info')
+
+def student_excel(request):
+    """Export excel file of student infomation"""
+    stuid_list = Student.objects.values_list('stu_id', flat=True)
+    name_list = Student.objects.values_list('name', flat=True)
+
+    data = [[]]
+    data.append([u'stu_id', u'name'])
+    for stuid, name in zip(stuid_list, name_list):
+        data.append([stuid, name])
+
+    return ExcelResponse(data, u'student_info')
