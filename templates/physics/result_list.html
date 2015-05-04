@@ -21,7 +21,12 @@
         </tr>
     {% endfor %}
 
-{% endblock %}
     </tbody>
   </table>
+
+<form action="{% url 'physics:result_excel' %}" method="get">
+    <input type="submit" value="导出" name="submit"/>
+</form>
+
 </div>
+{% endblock %}

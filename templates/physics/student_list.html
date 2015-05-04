@@ -39,4 +39,9 @@
 111114203   李某人<br>
 111114204   张某人<br>
 </p>
+
+<form action="{% url 'physics:student_excel' %}" method="get">
+    <input type="submit" value="导出" name="submit"/>
+</form>
+
 {% endblock %}
