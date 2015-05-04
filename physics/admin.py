@@ -38,7 +38,7 @@ class NotificationAdmin(admin.ModelAdmin):
 class ResultAdmin(admin.ModelAdmin):
     list_display = ('t_id', 'user_num', 'my_option')
     ordering = ('t_id', 'user_num')
-    search_fields = ('t_id',)
+    search_fields = ('t_id', 'user_num')
 
 
 admin.site.register(Teacher, TeacherAdmin)

@@ -77,4 +77,4 @@ class Result(models.Model):
     my_option = models.CharField(u'答案', max_length=10)
 
     class Meta:
-        ordering = ['t_id']
+        ordering = ['t_id', 'user_num']
