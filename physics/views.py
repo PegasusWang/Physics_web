@@ -14,7 +14,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.list import ListView
 
 from models import Student, Question, Notification, Result
-import fileHandler
+from .excel_response import ExcelResponse    # for excel export
+import file_handler
 
 # for Android backend
 @csrf_exempt  # note: use csrf_exempt for all POST, or you will get 403 error
@@ -109,7 +110,7 @@ class StudentListView(ListView):
 def upload_stu_file(request):
     """Get student information file and import to database"""
     if request.method == 'POST':
-        fileHandler.handle_uploaded_file(request.FILES['stu_file'])
+        file_handler.handle_uploaded_file(request.FILES['stu_file'])
         return HttpResponseRedirect('/users/students/')
     else:
         return HttpResponse('upload fail')
@@ -141,7 +142,7 @@ class ResultListView(ListView):
 
 def show_result(request):
     """draw result image"""
-    import matplotlibUtil
+    import matplotlib_util
     from mysite.settings import MEDIA_ROOT
 
     # draw histogram
@@ -157,7 +158,7 @@ def show_result(request):
     histogram_path = MEDIA_ROOT + 'images/results/' + '0.png'
     print histogram_path
     try:
-        matplotlibUtil.draw_histogram(nums[0], nums[1], nums[2], nums[3], 
+        matplotlib_util.draw_histogram(nums[0], nums[1], nums[2], nums[3],
                                       n_groups, histogram_path)
     except:    # handle all exception
         return render(request, 'physics/result_image.html',
@@ -178,7 +179,7 @@ def show_result(request):
         chart_path = MEDIA_ROOT + 'images/results/' + str(tid) + '.png'
         print chart_path
         try:
-            matplotlibUtil.draw_piechart(question_info, explode, chart_path)
+            matplotlib_util.draw_piechart(question_info, explode, chart_path)
         except:
             return render(request, 'physics/result_image.html',
                           {'images': None})
@@ -188,7 +189,7 @@ def show_result(request):
         images.append('/media/images/results/'+str(i)+'.png')
     return render(request, 'physics/result_image.html', {'images': images})
 
-from excel_response import ExcelResponse
+
 def result_excel(request):
     """Export excel file of result"""
     tid_list = Result.objects.values_list('t_id', flat=True)
@@ -196,19 +197,20 @@ def result_excel(request):
     opt_list = Result.objects.values_list('my_option', flat=True)
 
     data = [[]]
-    data.append((u't_id', u'stu_id', u'option'))
+    data.append([u'题号', u'学号', u'学生选项'])
     for tid, user, opt in zip(tid_list, user_list, opt_list):
         data.append([tid, user, opt])
 
     return ExcelResponse(data, u'result_info')
 
+
 def student_excel(request):
-    """Export excel file of student infomation"""
+    """Export excel file of student information"""
     stuid_list = Student.objects.values_list('stu_id', flat=True)
     name_list = Student.objects.values_list('name', flat=True)
 
     data = [[]]
-    data.append([u'stu_id', u'name'])
+    data.append([u'学号', u'姓名'])
     for stuid, name in zip(stuid_list, name_list):
         data.append([stuid, name])
 

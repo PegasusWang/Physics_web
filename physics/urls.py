@@ -27,4 +27,6 @@ urlpatterns = patterns('',
     url(r'^results/$', views.ResultListView.as_view(), name='result_info'),
     url(r'^results-image/$', views.show_result, name='result_image'),
     url(r'^stu-upload/$', views.upload_stu_file, name='student_upload'),
+    url(r'^result-excel/$', views.result_excel, name='result_excel'),
+    url(r'^student-excel/$', views.student_excel, name='student_excel'),
 )
