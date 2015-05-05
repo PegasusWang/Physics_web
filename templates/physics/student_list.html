@@ -28,8 +28,7 @@
 </div>
 <form action="{% url 'physics:student_upload' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <input type="file" name="stu_file"/>
-    <input type="submit" value="Upload" name="submit"/>
+    <input type="file" name="stu_file"/><input type="submit" value="点击上传" name="submit"/>
 </form>
 <p>上传说明：上传格式为txt文件，如果您的文件是excel文件，请直接在excel中拷贝包含学生学号和姓名的两列，粘贴到一个txt文本中即可。注意：上传后会清空之前
     的学生信息。<br>
