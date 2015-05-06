@@ -215,3 +215,14 @@ def student_excel(request):
         data.append([stuid, name])
 
     return ExcelResponse(data, u'student_info')
+
+
+def student_result(request):
+    """Show result in a special format.
+    eg: 111114201 Pegasus 1A2B3C4D5A6D
+    """
+    stuid_list = Student.objects.values_list('stu_id', flat=True)
+    name_list = Student.objects.values_list('name', flat=True)
+    for each_stuid in stuid_list:
+        Result.objects.filter(each_stuid)
+        # TODO
