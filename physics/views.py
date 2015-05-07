@@ -219,10 +219,30 @@ def student_excel(request):
 
 def student_result(request):
     """Show result in a special format.
-    eg: 111114201 Pegasus 1A2B3C4D5A6D
+    eg:
+        111114201 1A2B3C4D5A6D 3/6
+        3/6 means 3 correct of 6 question.
     """
     stuid_list = Student.objects.values_list('stu_id', flat=True)
     name_list = Student.objects.values_list('name', flat=True)
+    all_result = []    # each result is [stuid, answer, ratio], it's 2d list
+    all_answer = u''
+    answer = Question.objects.all()
+    for each in answer:
+        all_answer += unicode(each)
     for each_stuid in stuid_list:
-        Result.objects.filter(each_stuid)
-        # TODO
+        each_result = []
+        each_result.append(each_stuid)
+        res = Result.objects.filter(user_num=each_stuid)
+        each_res = u''
+        for each in res:
+            each_res += unicode(each)
+        each_result.append(each_res)
+        diff_answer_num = len([i for i in range(len(all_answer)) if all_answer[i] != each_res])
+        each_result.append(diff_answer_num)
+
+        all_result.append(each_result)
+
+    result = {'result': all_result}
+    print result
+    #return render(request, 'physics/student_result.html', {'result': result})

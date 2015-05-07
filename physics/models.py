@@ -55,7 +55,8 @@ class Question(models.Model):
     t_image = models.ImageField(u'Image', upload_to=get_image_path, blank=True)
 
     def __unicode__(self):
-        return self.t_content
+        ret_str = unicode(self.t_id) + unicode(self.t_answer)
+        return ret_str
 
 
 class Notification(models.Model):
@@ -75,6 +76,10 @@ class Result(models.Model):
     t_id = models.IntegerField(u'题号')
     user_num = models.CharField(u'学号', max_length=30)
     my_option = models.CharField(u'答案', max_length=10)
+
+    def __unicode__(self):
+        ans_str = unicode(self.t_id) + unicode(self.my_option)
+        return ans_str
 
     class Meta:
         ordering = ['t_id', 'user_num']
