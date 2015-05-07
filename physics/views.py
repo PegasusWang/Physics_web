@@ -224,12 +224,12 @@ def student_result(request):
         3/6 means 3 correct of 6 question.
     """
     stuid_list = Student.objects.values_list('stu_id', flat=True)
-    name_list = Student.objects.values_list('name', flat=True)
     all_result = []    # each result is [stuid, answer, ratio], it's 2d list
     all_answer = u''
     answer = Question.objects.all()
     for each in answer:
         all_answer += unicode(each)
+    print all_answer
     for each_stuid in stuid_list:
         each_result = []
         each_result.append(each_stuid)
@@ -238,11 +238,10 @@ def student_result(request):
         for each in res:
             each_res += unicode(each)
         each_result.append(each_res)
-        diff_answer_num = len([i for i in range(len(all_answer)) if all_answer[i] != each_res])
-        each_result.append(diff_answer_num)
+        diff_answer_num = len([i for i in range(len(each_res)) if all_answer[i] != each_res[i]])
+        each_result.append(len(all_answer)/2 - diff_answer_num)
 
         all_result.append(each_result)
 
-    result = {'result': all_result}
-    print result
-    #return render(request, 'physics/student_result.html', {'result': result})
+    return render(request, 'physics/student_result.html',
+                  {'results': all_result, 'all_answer': all_answer})

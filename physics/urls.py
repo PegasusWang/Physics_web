@@ -29,4 +29,5 @@ urlpatterns = patterns('',
     url(r'^stu-upload/$', views.upload_stu_file, name='student_upload'),
     url(r'^result-excel/$', views.result_excel, name='result_excel'),
     url(r'^student-excel/$', views.student_excel, name='student_excel'),
+    url(r'^student-result/$', views.student_result, name='student_result'),
 )
