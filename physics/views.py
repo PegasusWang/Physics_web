@@ -240,8 +240,35 @@ def student_result(request):
         each_result.append(each_res)
         diff_answer_num = len([i for i in range(len(each_res)) if all_answer[i] != each_res[i]])
         each_result.append(len(all_answer)/2 - diff_answer_num)
+        each_result.append(all_answer)
 
         all_result.append(each_result)
 
     return render(request, 'physics/student_result.html',
                   {'results': all_result, 'all_answer': all_answer})
+
+
+def student_result_excel(request):
+    """Export student_result excel."""
+    stuid_list = Student.objects.values_list('stu_id', flat=True)
+    all_result = []    # each result is [stuid, answer, ratio], it's 2d list
+    all_result.append([u'学号', u'学生答案', u'正确个数', u'标准答案'])
+    all_answer = u''
+    answer = Question.objects.all()
+    for each in answer:
+        all_answer += unicode(each)
+    for each_stuid in stuid_list:
+        each_result = []
+        each_result.append(each_stuid)
+        res = Result.objects.filter(user_num=each_stuid)
+        each_res = u''
+        for each in res:
+            each_res += unicode(each)
+        each_result.append(each_res)
+        diff_answer_num = len([i for i in range(len(each_res)) if all_answer[i] != each_res[i]])
+        each_result.append(len(all_answer)/2 - diff_answer_num)
+        each_result.append(all_answer)
+
+        all_result.append(each_result)
+
+    return ExcelResponse(all_result, u'student_result')

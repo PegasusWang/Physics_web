@@ -30,4 +30,5 @@ urlpatterns = patterns('',
     url(r'^result-excel/$', views.result_excel, name='result_excel'),
     url(r'^student-excel/$', views.student_excel, name='student_excel'),
     url(r'^student-result/$', views.student_result, name='student_result'),
+    url(r'^student-result-excel/$', views.student_result_excel, name='student_result_excel'),
 )

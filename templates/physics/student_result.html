@@ -19,7 +19,6 @@
         {% for each_value in each_result %}
             <td>{{ each_value }}</td>
         {%  endfor %}
-        <td>{{ all_answer }}</td>
         </tr>
     {% endfor %}
 
@@ -27,7 +26,7 @@
   </table>
 </div>
 
-<form action="{% url 'physics:student_excel' %}" method="get">
+<form action="{% url 'physics:student_result_excel' %}" method="get">
     <input type="submit" value="导出" name="submit"/>
 </form>
 
