@@ -6,12 +6,14 @@
     {% for question in object_list %}
         <p>
         {{ question.t_id }}.{{ question.t_content }}<br />
-        A.{{ question.t_option1 }}<br />
-        B.{{ question.t_option2 }}<br />
-        C.{{ question.t_option3 }}<br />
-        D.{{ question.t_option4 }}<br />
+        {% comment %}
+        {{ question.t_option1 }}<br />
+        {{ question.t_option2 }}<br />
+        {{ question.t_option3 }}<br />
+        {{ question.t_option4 }}<br />
+        {% endcomment %}
         {% if question.t_image %}
-            <img src="{{ question.t_image.url }}" width="700" height="500"/><br />
+            <img src="{{ question.t_image.url }}" width="950" height="400"/><br />
             <br />
         {% endif %}
         </p>

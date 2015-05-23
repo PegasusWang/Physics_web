@@ -42,7 +42,7 @@ def get_image_path(instance, filename):
 class Question(models.Model):
     """Question Info"""
     t_id = models.IntegerField(u'题号', primary_key=True)
-    t_content = models.TextField(u'题目')
+    t_content = models.TextField(u'题目', blank=True)
     t_answer = models.CharField(u'答案', max_length=1)
     a_select_users = models.IntegerField(u'选A人数', default=0)
     b_select_users = models.IntegerField(u'选B人数', default=0)
