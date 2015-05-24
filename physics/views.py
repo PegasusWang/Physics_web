@@ -110,8 +110,12 @@ class StudentListView(ListView):
 def upload_stu_file(request):
     """Get student information file and import to database"""
     if request.method == 'POST':
-        file_handler.handle_uploaded_file(request.FILES['stu_file'])
-        return HttpResponseRedirect('/users/students/')
+        upload_file = request.FILES.get('stu_file', None)
+        if upload_file is not None:
+            file_handler.handle_uploaded_file(upload_file)
+            return HttpResponseRedirect('/users/students/')
+        else:
+            return HttpResponse('upload fail')
     else:
         return HttpResponse('upload fail')
 
