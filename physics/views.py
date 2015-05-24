@@ -14,7 +14,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.list import ListView
 
 from models import Student, Question, Notification, Result
-from .excel_response import ExcelResponse    # for excel export
+from .excel_response import ExcelResponse    # for excel, install xlwt first
 import file_handler
 
 # for Android backend
@@ -115,7 +115,7 @@ def upload_stu_file(request):
             file_handler.handle_uploaded_file(upload_file)
             return HttpResponseRedirect('/users/students/')
         else:
-            return HttpResponse('upload fail')
+            return HttpResponse('please select a file')
     else:
         return HttpResponse('upload fail')
 
